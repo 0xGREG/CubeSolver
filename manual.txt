@@ -1,3 +1,6 @@
+//TODO
+1) verification of a cube (parities)
+
 1) Classes:
     cube:
         tiles array format:

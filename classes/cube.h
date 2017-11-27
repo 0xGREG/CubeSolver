@@ -8,7 +8,7 @@ class cube
 {
     private:
         int size;
-        short tiles[6][9];
+        short** tiles;
         short* right;
         short* left;
         short* front;
@@ -23,6 +23,8 @@ class cube
     public:
         cube(int _size);
         bool setTiles(string order);
+        bool verifyTiles(short**);
+        bool checkString(string order);
 };
 
 #endif
