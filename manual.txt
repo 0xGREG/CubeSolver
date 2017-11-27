@@ -31,7 +31,7 @@
 
                 - centre pieces have to be each different
                 - edges have to have two different colors and those colors can not be from the opposite sides (for example 2 and 5)
-                    compared edges (no need to compare more as they are in pairs):
+                    edges to compare (no need to compare more as they are in pairs):
                     2   | 1 -> (3,1)
                         | 3 -> (4,1)
                         | 5 -> (1,1)
@@ -49,3 +49,15 @@
                         | 5 -> (4,3)
 
                 - there has to be 4 edge pieces in each color
+                - there has to be 4 corner pieces of each color
+                - corners need to have 3 different colors and none of them can be from opposite side of other
+                    corners to compare:
+                    2   | 0 -> (4,0),(3,2)
+                        | 2 -> (1,2),(3,0)
+                        | 6 -> (4,2),(0,0)
+                        | 8 -> (0,2),(1,0)
+                    
+                    5   | 0 -> (4,8),(0,6)
+                        | 2 -> (0,8),(1,6)
+                        | 6 -> (4,6),(3,8)
+                        | 8 -> (1,8),(3,6)
