@@ -1,0 +1,51 @@
+1) Classes:
+    cube:
+        tiles array format:
+            tiles are expected in the following form:
+            - opposite sides have numbers incremented by 3 relative to each other
+            - tiles on each side are represented as in the net representation in following form:
+                       
+                    2
+                4   0   1   3
+                    5
+            
+            - full net looks like that:
+            
+                            [2,0][2,1][2,2]
+                            [2,3][2,4][2,5]
+                            [2,6][2,7][2,8]
+            
+            [4,0][4,1][4,2] [0,0][0,1][0,2] [1,0][1,1][1,2] [3,0][3,1][3,2]
+            [4,3][4,4][4,5] [0,3][0,4][0,5] [1,3][1,4][1,5] [3,3][3,4][3,5]
+            [4,6][4,7][4,8] [0,6][0,7][0,8] [1,6][1,7][1,8] [3,6][3,7][3,8]
+            
+                            [5,0][5,1][5,2]
+                            [5,3][5,4][5,5]
+                            [5,6][5,7][5,8]
+            
+        setTiles(string):
+            - sets tiles structure and verifies it according to the following rules:
+                - string is six 9-characters long blocks divided with spaces
+                - each character is equivalent to one color (therefore there can only be 9 different characters in the string)
+                - blocks and characters will be filled using structure from [tiles array format]
+
+                - centre pieces have to be each different
+                - edges have to have two different colors and those colors can not be from the opposite sides (for example 2 and 5)
+                    compared edges (no need to compare more as they are in pairs):
+                    2   | 1 -> (3,1)
+                        | 3 -> (4,1)
+                        | 5 -> (1,1)
+                        | 7 -> (0,1)
+
+                    5   | 1 -> (0,7)
+                        | 3 -> (4,7)
+                        | 5 -> (1,7)
+                        | 7 -> (3,7)
+
+                    0   | 3 -> (4,5)
+                        | 5 -> (1,3)
+
+                    3   | 3 -> (1,5)
+                        | 5 -> (4,3)
+
+                - there has to be 4 edge pieces in each color
