@@ -16,6 +16,23 @@ int main(int argc, char *argv[]){
     mainCube.setTiles("000010000 000010000 000010000 000010000 0000100001000010000");
     mainCube.setTiles("000010000 000010000 000010000 000010000 000010000 000010000");
     mainCube.setTiles("000000000 000010000 000020000 000030000 000040000 000050000");
+    mainCube.setTiles("000000000 111111111 222222222 333333333 444444444 555555555");
+    mainCube.displayCube();
+
+    mainCube.setTiles("002002002 111111111 223223223 533533533 444444444 550550550");
+    mainCube.displayCube();
+    mainCube.move("r");
+    mainCube.displayCube();
+    mainCube.move("r'");
+    mainCube.displayCube();
+    cout << "-------------------------------------\n\n";
+
+    mainCube.setTiles("250501121 521314200 243424411 503331555 450240312 033052434");
+    mainCube.displayCube();
+    mainCube.move("r");
+    mainCube.displayCube();
+    mainCube.move("r'");
+    mainCube.displayCube();
 
     return 0;
 }
