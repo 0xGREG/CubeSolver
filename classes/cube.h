@@ -15,6 +15,7 @@ class cube
         short* back;
         short* top;
         short* bottom;
+        bool testing; // it's set to true if this is an test set instace
         bool correct; // set this flag to true after setting cube and validating all sides
         bool solved; // flag set to true by updateIsSolved() if cube is in solved state
 
@@ -26,14 +27,20 @@ class cube
         
         void move_r();
         void move_r_prime();
+        void move_u();
+        void move_u_prime();
 
     public:
         cube(int _size);
+        void testClass(); // for debugging purposes only! will run test cases and mess up with an object
         bool setTiles(string order);
         bool verifyTiles(short**);
         bool checkString(string order);
         void displayCube();
         void move(string side);
+        string toString();
+
+        bool isSolved() {updateIsSolved(); return solved;}
 };
 
 #endif

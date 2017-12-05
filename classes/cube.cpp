@@ -1,12 +1,13 @@
 #include "cube.h"
 #include <iostream>
 #include "../globals/includes.h"
-#include "../globals/functions.cpp"
+#include "../globals/functions.h"
 using namespace std;
 
 cube::cube(int _size){
     size = _size;
-    if (globalFlags::fDebug)
+    testing = false;
+    if (globalFlags::fDebug && !testing)
         cout << "--- Starting cube initialization ---" << endl;
     tiles = new short*[6];
     for (int i = 0; i < 6; i++)
@@ -17,7 +18,7 @@ cube::cube(int _size){
             tiles[i][j] = 0;
         }
     }
-    if (globalFlags::fDebug)
+    if (globalFlags::fDebug && !testing)
         showSuccessMessage("All tiles set to 0");
     correct = false;
     solved = false;
@@ -33,13 +34,13 @@ void cube::updateIsSolved(){
             if (tiles[i][j] != color)
             {
                 sideSolved = false;
-                break;
+                return;
             }
         }
         if (!sideSolved)
         {
             solved = false;
-            break;
+            return;
         }
     }
     solved = true;
@@ -47,7 +48,7 @@ void cube::updateIsSolved(){
 
 bool cube::setTiles(string order)
 {
-    if (globalFlags::fDebug)
+    if (globalFlags::fDebug && !testing)
         cout << "\n--- Starting tiles setting procedure ---\n" << endl;
     short** newNet;
     newNet = new short*[6];
@@ -61,7 +62,7 @@ bool cube::setTiles(string order)
     }
     if (!checkString(order))
     {
-        if (globalFlags::fDebug)
+        if (globalFlags::fDebug && !testing)
             showErrorMessage("Failed to set the cube tiles\n");
         return false;
     }
@@ -92,7 +93,8 @@ bool cube::setTiles(string order)
         tiles = newNet;
     }
 
-    showSuccessMessage("All tiles set\n");
+    if (!testing)
+        showSuccessMessage("All tiles set\n");
     return true;
 }
 
@@ -100,7 +102,8 @@ bool cube::checkString(string order)
 {
     if (order.length() != 59)
     {
-        showErrorMessage("The order provided has wrong length");
+        if (!testing)
+            showErrorMessage("The order provided has wrong length");
         return false;
     }
 
@@ -108,31 +111,35 @@ bool cube::checkString(string order)
     {
         if (!order[i*10+9] == ' ')
         {
-            showErrorMessage("Blocks (sides) are not separated with space");
+            if (!testing)
+                showErrorMessage("Blocks (sides) are not separated with space");
             return false;
         }
     }
 
     char characters[6];
-    if (globalFlags::fDebug)
+    if (globalFlags::fDebug&& !testing)
         cout << "centers: " << endl;
 
     for (int i = 0; i < 6; i++)
     {
         characters[i] = order[i*10+4];
-        if (globalFlags::fDebug)
+        if (globalFlags::fDebug && !testing)
             cout << characters[i] << " ";
         for (int j = 0; j < i; j++)
         {
             if (characters[i] == characters[j])
             {
-                cout << "\n";
-                showErrorMessage("Centers are not all different!");
+                if (!testing)
+                {
+                    cout << "\n";
+                    showErrorMessage("Centers are not all different!");
+                }
                 return false;
             }
         }
     }
-    if (globalFlags::fDebug)
+    if (globalFlags::fDebug && !testing)
         cout << endl;
 
     char c = '\0';
@@ -152,7 +159,8 @@ bool cube::checkString(string order)
         }
         if (match == -1)
         {
-            showErrorMessage("The order provided contains more than 9 colors");
+            if (!testing)
+                showErrorMessage("The order provided contains more than 9 colors");
             return false;
         }
         else
@@ -165,7 +173,8 @@ bool cube::checkString(string order)
     {
         if (counter[i] != 8)
         {
-            showErrorMessage("The number of tiles in each color doesn't match");
+            if (!testing)
+                showErrorMessage("The number of tiles in each color doesn't match");
             return false;
         }
     }
@@ -178,7 +187,7 @@ bool cube::verifyTiles(short**)
     return true;
 }
 
-string cube::createColoredString(short character)
+string cube::createColoredString(short character) // gets number as input and prints it as colored ascii (if input was 1 output will be "1")
 {
     string output = "";//"\x1b[";
     switch(character)
@@ -337,9 +346,76 @@ void cube::move_r_prime()
     moveTile(old,2,1,0);
     moveTile(old,3,1,7);
     moveTile(old,5,1,1);
-    moveTile(old,6,1,0);
+    moveTile(old,6,1,8);
     moveTile(old,7,1,5);
     moveTile(old,8,1,2);
+}
+
+
+void cube::move_u()
+{
+    short* old;
+    short* old2;
+    old = sideCopy(0);
+    moveTile(1,0,0,0);
+    moveTile(1,1,0,1);
+    moveTile(1,2,0,2);
+    old2 = sideCopy(4);
+    moveTile(old,0,4,0);
+    moveTile(old,1,4,1);
+    moveTile(old,2,4,2);
+    old = old2;
+    old2 = sideCopy(3);
+    moveTile(old,0,3,0);
+    moveTile(old,1,3,1);
+    moveTile(old,2,3,2);
+    old = old2;
+    old2 = sideCopy(1);
+    moveTile(old,0,1,0);
+    moveTile(old,1,1,1);
+    moveTile(old,2,1,2);
+    old = sideCopy(2);
+    moveTile(old,0,2,2);
+    moveTile(old,1,2,5);
+    moveTile(old,2,2,8);
+    moveTile(old,3,2,1);
+    moveTile(old,5,2,7);
+    moveTile(old,6,2,0);
+    moveTile(old,7,2,3);
+    moveTile(old,8,2,6);
+}
+
+void cube::move_u_prime()
+{
+    short* old;
+    short* old2;
+    old = sideCopy(0);
+    moveTile(4,0,0,0);
+    moveTile(4,1,0,1);
+    moveTile(4,2,0,2);
+    old2 = sideCopy(1);
+    moveTile(old,0,1,0);
+    moveTile(old,1,1,1);
+    moveTile(old,2,1,2);
+    old = old2;
+    old2 = sideCopy(3);
+    moveTile(old,0,3,0);
+    moveTile(old,1,3,1);
+    moveTile(old,2,3,2);
+    old = old2;
+    old2 = sideCopy(4);
+    moveTile(old,0,4,0);
+    moveTile(old,1,4,1);
+    moveTile(old,2,4,2);
+    old = sideCopy(2);
+    moveTile(old,0,2,6);
+    moveTile(old,1,2,3);
+    moveTile(old,2,2,0);
+    moveTile(old,3,2,7);
+    moveTile(old,5,2,1);
+    moveTile(old,6,2,8);
+    moveTile(old,7,2,5);
+    moveTile(old,8,2,2);
 }
 
 void cube::move(string side)
@@ -348,4 +424,33 @@ void cube::move(string side)
         move_r();
     else if (side == "r'")
         move_r_prime(); 
+    else if (side == "u")
+        move_u();
+    else if (side == "u'")
+        move_u_prime();
+    else if (side == "2r")
+    {
+        move_r();
+        move_r();
+    }
+    else if (side == "2r'")
+    {
+        move_r_prime();
+        move_r_prime();
+    }
 }
+
+string cube::toString()
+{
+    string output = "";
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            output += (char)(tiles[i][j]+48);
+        }
+        output += " ";
+    }
+    return output;
+}
+
