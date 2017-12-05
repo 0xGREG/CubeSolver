@@ -7,49 +7,57 @@ using namespace std;
 cube::cube(int _size){
     size = _size;
     testing = false;
+    correct = false; // cube is not yet correct (not set/not in solvable state)
+    solved = false;
+    sides = 6; // currently only cubes are supported
+    tilesOnSide = _size * _size; // there is (size^2) tiles on each side
+
     if (globalFlags::fDebug && !testing)
         cout << "--- Starting cube initialization ---" << endl;
-    tiles = new short*[6];
-    for (int i = 0; i < 6; i++)
+
+    initializeCube();
+
+    if (globalFlags::fDebug && !testing)
+        showSuccessMessage("All tiles set to 0");
+}
+
+void cube::initializeCube()
+// initialize the cube to 3x3x3 with all tiles set to 0
+{
+    tiles = new short*[sides];
+    for (int i = 0; i < sides; i++)
     {
-        tiles[i] = new short[9];
-        for (int j = 0; j < 9; j++)
+        tiles[i] = new short[tilesOnSide];
+        for (int j = 0; j < tilesOnSide; j++)
         {
             tiles[i][j] = 0;
         }
     }
-    if (globalFlags::fDebug && !testing)
-        showSuccessMessage("All tiles set to 0");
-    correct = false;
-    solved = false;
 }
 
-void cube::updateIsSolved(){
-    for (int i = 0; i < 6; i++)
+void cube::updateIsSolved()
+// check if the cube is in solved state and update solved variable to required state
+{
+    for (int i = 0; i < sides; i++)
     {
-        bool sideSolved = true;
-        short color = tiles[i][0];
-        for (int j = 1; j < 9; j++)
+        short color = tiles[i][0]; // get color (value) of the first tile on the side
+        for (int j = 1; j < tilesOnSide; j++)
         {
-            if (tiles[i][j] != color)
+            if (tiles[i][j] != color) 
             {
-                sideSolved = false;
+                solved = false; // if at least one tile on the side is different than the first one we know that cube is not solved
                 return;
             }
         }
-        if (!sideSolved)
-        {
-            solved = false;
-            return;
-        }
     }
-    solved = true;
+    solved = true; // if all the sades are single-colored we know that cube is solved
 }
 
 bool cube::setTiles(string order)
 {
     if (globalFlags::fDebug && !testing)
         cout << "\n--- Starting tiles setting procedure ---\n" << endl;
+
     short** newNet;
     newNet = new short*[6];
     for (int i = 0; i < 6; i++)
@@ -285,161 +293,6 @@ void cube::moveTile(int source_side, int source_tile, int destination_side, int 
     tiles[destination_side][destination_tile] = tiles[source_side][source_tile];
 }
 
-void cube::move_r()
-{
-    short* old;
-    short* old2;
-    old = sideCopy(0);
-    moveTile(5,2,0,2);
-    moveTile(5,5,0,5);
-    moveTile(5,8,0,8);
-    old2 = sideCopy(2);
-    moveTile(old,2,2,2);
-    moveTile(old,5,2,5);
-    moveTile(old,8,2,8);
-    old = old2;
-    old2 = sideCopy(3);
-    moveTile(old,2,3,6);
-    moveTile(old,5,3,3);
-    moveTile(old,8,3,0);
-    old = old2;
-    old2 = sideCopy(5);
-    moveTile(old,0,5,8);
-    moveTile(old,3,5,5);
-    moveTile(old,6,5,2);
-    old = sideCopy(1);
-    moveTile(old,0,1,2);
-    moveTile(old,1,1,5);
-    moveTile(old,2,1,8);
-    moveTile(old,3,1,1);
-    moveTile(old,5,1,7);
-    moveTile(old,6,1,0);
-    moveTile(old,7,1,3);
-    moveTile(old,8,1,6);
-}
-
-void cube::move_r_prime()
-{
-    short* old;
-    short* old2;
-    old = sideCopy(5);
-    moveTile(0,2,5,2);
-    moveTile(0,5,5,5);
-    moveTile(0,8,5,8);
-    old2 = sideCopy(3);
-    moveTile(old,2,3,6);
-    moveTile(old,5,3,3);
-    moveTile(old,8,3,0);
-    old = old2;
-    old2 = sideCopy(2);
-    moveTile(old,0,2,8);
-    moveTile(old,3,2,5);
-    moveTile(old,6,2,2);
-    old = old2;
-    old2 = sideCopy(0);
-    moveTile(old,2,0,2);
-    moveTile(old,5,0,5);
-    moveTile(old,8,0,8);
-    old = sideCopy(1);
-    moveTile(old,0,1,6);
-    moveTile(old,1,1,3);
-    moveTile(old,2,1,0);
-    moveTile(old,3,1,7);
-    moveTile(old,5,1,1);
-    moveTile(old,6,1,8);
-    moveTile(old,7,1,5);
-    moveTile(old,8,1,2);
-}
-
-
-void cube::move_u()
-{
-    short* old;
-    short* old2;
-    old = sideCopy(0);
-    moveTile(1,0,0,0);
-    moveTile(1,1,0,1);
-    moveTile(1,2,0,2);
-    old2 = sideCopy(4);
-    moveTile(old,0,4,0);
-    moveTile(old,1,4,1);
-    moveTile(old,2,4,2);
-    old = old2;
-    old2 = sideCopy(3);
-    moveTile(old,0,3,0);
-    moveTile(old,1,3,1);
-    moveTile(old,2,3,2);
-    old = old2;
-    old2 = sideCopy(1);
-    moveTile(old,0,1,0);
-    moveTile(old,1,1,1);
-    moveTile(old,2,1,2);
-    old = sideCopy(2);
-    moveTile(old,0,2,2);
-    moveTile(old,1,2,5);
-    moveTile(old,2,2,8);
-    moveTile(old,3,2,1);
-    moveTile(old,5,2,7);
-    moveTile(old,6,2,0);
-    moveTile(old,7,2,3);
-    moveTile(old,8,2,6);
-}
-
-void cube::move_u_prime()
-{
-    short* old;
-    short* old2;
-    old = sideCopy(0);
-    moveTile(4,0,0,0);
-    moveTile(4,1,0,1);
-    moveTile(4,2,0,2);
-    old2 = sideCopy(1);
-    moveTile(old,0,1,0);
-    moveTile(old,1,1,1);
-    moveTile(old,2,1,2);
-    old = old2;
-    old2 = sideCopy(3);
-    moveTile(old,0,3,0);
-    moveTile(old,1,3,1);
-    moveTile(old,2,3,2);
-    old = old2;
-    old2 = sideCopy(4);
-    moveTile(old,0,4,0);
-    moveTile(old,1,4,1);
-    moveTile(old,2,4,2);
-    old = sideCopy(2);
-    moveTile(old,0,2,6);
-    moveTile(old,1,2,3);
-    moveTile(old,2,2,0);
-    moveTile(old,3,2,7);
-    moveTile(old,5,2,1);
-    moveTile(old,6,2,8);
-    moveTile(old,7,2,5);
-    moveTile(old,8,2,2);
-}
-
-void cube::move(string side)
-{
-    if (side == "r")
-        move_r();
-    else if (side == "r'")
-        move_r_prime(); 
-    else if (side == "u")
-        move_u();
-    else if (side == "u'")
-        move_u_prime();
-    else if (side == "2r")
-    {
-        move_r();
-        move_r();
-    }
-    else if (side == "2r'")
-    {
-        move_r_prime();
-        move_r_prime();
-    }
-}
-
 string cube::toString()
 {
     string output = "";
@@ -454,3 +307,28 @@ string cube::toString()
     return output;
 }
 
+short** cube::cubeCopy()
+{
+    short** newCube = new short*[6]();
+    for (int i = 0; i < 6; i++)
+    {
+        newCube[i] = sideCopy(i);
+    }
+    return newCube;
+}
+
+bool cube::solve()
+{
+    if (globalFlags::fDebug)
+        cout << "\nStarting solving procedure\n\n";
+    if (globalFlags::fLearning)
+        solveLearning();
+    return true;
+}
+
+bool cube::solveLearning()
+{
+    if (globalFlags::fDebug)
+        cout << "Solving in learning mode\n\n";
+    return true;
+}

@@ -8,6 +8,7 @@ class globalFlags
 
     public:
         static bool fDebug;
+        static bool fLearning;
 };
 
 #endif
