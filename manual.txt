@@ -1,5 +1,8 @@
 //TODO
 1) verification of a cube (parities)
+2) solving
+3) moves
+4) Finding edges/corners
 
 1) Classes:
     cube:

@@ -302,7 +302,8 @@ string cube::toString()
         {
             output += (char)(tiles[i][j]+48);
         }
-        output += " ";
+        if (i != 5)
+            output += " ";
     }
     return output;
 }

@@ -33,6 +33,8 @@ class cube
         void move_r_prime();
         void move_u();
         void move_u_prime();
+        void move_l();
+        void move_l_prime();
 
         int shortestAlgorithmLength;
         string shortestAlgorithm;
