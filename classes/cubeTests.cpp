@@ -258,4 +258,107 @@ void cube::testClass()
         wasError = false;
     }
 
+    wasError= false;
+    if (setTiles("000000111 111111333 222222222 333333444 444444000 555555555") && toString()=="000000111 111111333 222222222 333333444 444444000 555555555")
+        showSuccessMessage("Test 24 Passed");
+    else
+    {
+        showErrorMessage("Failed on 000000111 111111333 222222222 333333444 444444000 555555555");
+        wasError = true;
+    }
+
+    if (!wasError)
+    {
+        move("d");
+
+        if (toString()=="000000000 111111111 222222222 333333333 444444444 555555555")
+            showSuccessMessage("Test 25 Passed");
+        else
+            showErrorMessage("Failed on D turn on 000000111 111111333 222222222 333333444 444444000 555555555");
+    }
+    else
+    {
+        showWarningMessage("Skipping test 25 as initialization failed");
+        wasError = false;
+    }
+
+    wasError= false;
+    if (setTiles("300205331 552014020 504423111 344531532 335240012 122554414") && toString()=="300205331 552014020 504423111 344531532 335240012 122554414")
+        showSuccessMessage("Test 26 Passed");
+    else
+    {
+        showErrorMessage("Failed on 300205331 552014020 504423111 344531532 335240012 122554414");
+        wasError = true;
+    }
+
+    if (!wasError)
+    {
+        move("d");
+
+        if (toString()=="300205012 552014331 504423111 344531020 335240532 451152442")
+            showSuccessMessage("Test 27 Passed");
+        else
+            showErrorMessage("Failed on D turn on 300205331 552014020 504423111 344531532 335240012 122554414");
+    }
+    else
+    {
+        showWarningMessage("Skipping test 27 as initialization failed");
+        wasError = false;
+    }
+
+    wasError= false;
+    if (setTiles("511303222 000512314 452421355 103434230 551042543 401352410") && toString()=="511303222 000512314 452421355 103434230 551042543 401352410")
+        showSuccessMessage("Test 28 Passed");
+    else
+    {
+        showErrorMessage("Failed on 511303222 000512314 452421355 103434230 551042543 401352410");
+        wasError = true;
+    }
+
+    if (!wasError)
+    {
+        move("l");
+        move("u");
+        move("r");
+        move("d");
+        move("d'");
+        move("r'");
+        move("u'");
+        move("l'");
+
+        if (toString()=="511303222 000512314 452421355 103434230 551042543 401352410")
+            showSuccessMessage("Test 29 Passed");
+        else
+            showErrorMessage("Failed on LURDD'R'U'L' sequence on 511303222 000512314 452421355 103434230 551042543 401352410");
+    }
+    else
+    {
+        showWarningMessage("Skipping test 29 as initialization failed");
+        wasError = false;
+    }
+
+    wasError= false;
+    if (setTiles("211105305 220012031 225524350 411033324 334140245 441554035") && toString()=="211105305 220012031 225524350 411033324 334140245 441554035")
+        showSuccessMessage("Test 30 Passed");
+    else
+    {
+        showErrorMessage("Failed on 211105305 220012031 225524350 411033324 334140245 441554035");
+        wasError = true;
+    }
+
+    if (!wasError)
+    {
+        move("d'");
+
+        if (toString()=="211105031 220012324 225524350 411033245 334140305 145453450")
+            showSuccessMessage("Test 31 Passed");
+        else
+            showErrorMessage("Failed on D' turn on 211105305 220012031 225524350 411033324 334140245 441554035");
+    }
+    else
+    {
+        showWarningMessage("Skipping test 31 as initialization failed");
+        wasError = false;
+    }
+
 }
