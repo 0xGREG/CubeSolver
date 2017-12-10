@@ -4,7 +4,7 @@
 #include "../globals/functions.h"
 using namespace std;
 
-void cube::move(string side)
+bool cube::move(string side)
 {
     if (side == "r")
         move_r();
@@ -22,6 +22,13 @@ void cube::move(string side)
         move_d();
     else if (side == "d'")
         move_d_prime();
+    else if (side == "f")
+        move_f();
+    else if (side == "f'")
+        move_f_prime();
+    else
+        return false;
+    return true;
 }
 
 void cube::move_r()
@@ -279,4 +286,70 @@ void cube::move_d_prime()
     moveTile(old,6,5,8);
     moveTile(old,7,5,5);
     moveTile(old,8,5,2);
+}
+
+
+void cube::move_f()
+{
+    short* old;
+    short* old2;
+    old = sideCopy(2);
+    moveTile(4,2,2,8);
+    moveTile(4,5,2,7);
+    moveTile(4,8,2,6);
+    old2 = sideCopy(1);
+    moveTile(old,6,1,0);
+    moveTile(old,7,1,3);
+    moveTile(old,8,1,6);
+    old = old2;
+    old2 = sideCopy(5);
+    moveTile(old,0,5,2);
+    moveTile(old,3,5,1);
+    moveTile(old,6,5,0);
+    old = old2;
+    moveTile(old,0,4,2);
+    moveTile(old,1,4,5);
+    moveTile(old,2,4,8);
+    old = sideCopy(0);
+    moveTile(old,0,0,2);
+    moveTile(old,1,0,5);
+    moveTile(old,2,0,8);
+    moveTile(old,3,0,1);
+    moveTile(old,5,0,7);
+    moveTile(old,6,0,0);
+    moveTile(old,7,0,3);
+    moveTile(old,8,0,6);
+}
+
+
+void cube::move_f_prime()
+{
+    short* old;
+    short* old2;
+    old = sideCopy(2);
+    moveTile(1,0,2,6);
+    moveTile(1,3,2,7);
+    moveTile(1,6,2,8);
+    old2 = sideCopy(4);
+    moveTile(old,6,4,8);
+    moveTile(old,7,4,5);
+    moveTile(old,8,4,2);
+    old = old2;
+    old2 = sideCopy(5);
+    moveTile(old,2,5,0);
+    moveTile(old,5,5,1);
+    moveTile(old,8,5,2);
+    old = old2;
+    moveTile(old,0,1,6);
+    moveTile(old,1,1,3);
+    moveTile(old,2,1,0);
+    old = sideCopy(0);
+    moveTile(old,0,0,6);
+    moveTile(old,1,0,3);
+    moveTile(old,2,0,0);
+    moveTile(old,3,0,7);
+    moveTile(old,5,0,1);
+    moveTile(old,6,0,8);
+    moveTile(old,7,0,5);
+    moveTile(old,8,0,2);
 }

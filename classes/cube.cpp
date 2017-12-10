@@ -333,3 +333,11 @@ bool cube::solveLearning()
         cout << "Solving in learning mode\n\n";
     return true;
 }
+
+bool cube::execute(string functionToRun, string arguments)
+{
+    if (functionToRun == "setTiles")
+        return setTiles(arguments);
+    else if (functionToRun == "move")
+        return move(arguments);
+}

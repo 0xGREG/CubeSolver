@@ -2,7 +2,35 @@
 #define CUBE_H
 
 #include <iostream>
+#include <cctype>
+#include <clocale>
 using namespace std;
+
+class cube;
+
+struct testCase
+{
+    string functionToRun;
+    string functionArgument;
+    bool functionResult;
+    string cubeState;
+    string description;
+    void set(string _functionToRun, string _functionArgument, string _cubeState = "", bool _functionResult = true, string _description = "")
+    {
+        functionArgument = _functionArgument;
+        functionResult = _functionResult;
+        cubeState = _cubeState;
+        description = _description;
+        functionToRun = _functionToRun;
+    }
+    testCase(){
+        functionToRun = "";
+        functionArgument = "";
+        functionResult = true;
+        cubeState = "";
+        description = "";
+    };
+};
 
 class cube
 {
@@ -28,6 +56,8 @@ class cube
         void moveTile(int source_side, int source_tile, int destination_side, int destination_tile);
         short** cubeCopy();
         void initializeCube();
+        bool execute(string functionToRun, string argumets);
+        void runTestCases(int& counter, int length, testCase* testCases);
         
         void move_r();
         void move_r_prime();
@@ -37,6 +67,8 @@ class cube
         void move_l_prime();
         void move_d();
         void move_d_prime();
+        void move_f();
+        void move_f_prime();
 
         int shortestAlgorithmLength;
         string shortestAlgorithm;
@@ -48,7 +80,7 @@ class cube
         bool verifyTiles(short**);
         bool checkString(string order);
         void displayCube();
-        void move(string side);
+        bool move(string side);
         string toString();
 
         bool solve();
