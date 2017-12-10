@@ -59,15 +59,18 @@ void cube::move_r()
     moveTile(old,2,2,2);
     moveTile(old,5,2,5);
     moveTile(old,8,2,8);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,2,3,6);
     moveTile(old,5,3,3);
     moveTile(old,8,3,0);
+    delete[] old;
     old = old2;
     moveTile(old,0,5,8);
     moveTile(old,3,5,5);
     moveTile(old,6,5,2);
+    delete[] old;
     old = sideCopy(1);
     moveTile(old,0,1,2);
     moveTile(old,1,1,5);
@@ -77,6 +80,7 @@ void cube::move_r()
     moveTile(old,6,1,0);
     moveTile(old,7,1,3);
     moveTile(old,8,1,6);
+    delete[] old;
 }
 
 void cube::move_r_prime()
@@ -91,15 +95,18 @@ void cube::move_r_prime()
     moveTile(old,2,3,6);
     moveTile(old,5,3,3);
     moveTile(old,8,3,0);
+    delete[] old;
     old = old2;
     old2 = sideCopy(2);
     moveTile(old,0,2,8);
     moveTile(old,3,2,5);
     moveTile(old,6,2,2);
+    delete[] old;
     old = old2;
     moveTile(old,2,0,2);
     moveTile(old,5,0,5);
     moveTile(old,8,0,8);
+    delete[] old;
     old = sideCopy(1);
     moveTile(old,0,1,6);
     moveTile(old,1,1,3);
@@ -109,6 +116,7 @@ void cube::move_r_prime()
     moveTile(old,6,1,8);
     moveTile(old,7,1,5);
     moveTile(old,8,1,2);
+    delete[] old;
 }
 
 
@@ -124,15 +132,18 @@ void cube::move_u()
     moveTile(old,0,4,0);
     moveTile(old,1,4,1);
     moveTile(old,2,4,2);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,0,3,0);
     moveTile(old,1,3,1);
     moveTile(old,2,3,2);
+    delete[] old;
     old = old2;
     moveTile(old,0,1,0);
     moveTile(old,1,1,1);
     moveTile(old,2,1,2);
+    delete[] old;
     old = sideCopy(2);
     moveTile(old,0,2,2);
     moveTile(old,1,2,5);
@@ -142,6 +153,7 @@ void cube::move_u()
     moveTile(old,6,2,0);
     moveTile(old,7,2,3);
     moveTile(old,8,2,6);
+    delete[] old;
 }
 
 void cube::move_u_prime()
@@ -156,15 +168,18 @@ void cube::move_u_prime()
     moveTile(old,0,1,0);
     moveTile(old,1,1,1);
     moveTile(old,2,1,2);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,0,3,0);
     moveTile(old,1,3,1);
     moveTile(old,2,3,2);
+    delete[] old;
     old = old2;
     moveTile(old,0,4,0);
     moveTile(old,1,4,1);
     moveTile(old,2,4,2);
+    delete[] old;
     old = sideCopy(2);
     moveTile(old,0,2,6);
     moveTile(old,1,2,3);
@@ -174,6 +189,7 @@ void cube::move_u_prime()
     moveTile(old,6,2,8);
     moveTile(old,7,2,5);
     moveTile(old,8,2,2);
+    delete[] old;
 }
 
 void cube::move_l()
@@ -188,15 +204,18 @@ void cube::move_l()
     moveTile(old,0,3,8);
     moveTile(old,3,3,5);
     moveTile(old,6,3,2);
+    delete[] old;
     old = old2;
     old2 = sideCopy(2);
     moveTile(old,2,2,6);
     moveTile(old,5,2,3);
     moveTile(old,8,2,0);
+    delete[] old;
     old = old2;
     moveTile(old,0,0,0);
     moveTile(old,3,0,3);
     moveTile(old,6,0,6);
+    delete[] old;
     old = sideCopy(4);
     moveTile(old,0,4,2);
     moveTile(old,1,4,5);
@@ -206,6 +225,7 @@ void cube::move_l()
     moveTile(old,6,4,0);
     moveTile(old,7,4,3);
     moveTile(old,8,4,6);
+    delete[] old;
 }
 
 void cube::move_l_prime()
@@ -220,15 +240,18 @@ void cube::move_l_prime()
     moveTile(old,0,2,0);
     moveTile(old,3,2,3);
     moveTile(old,6,2,6);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,0,3,8);
     moveTile(old,3,3,5);
     moveTile(old,6,3,2);
+    delete[] old;
     old = old2;
     moveTile(old,2,5,6);
     moveTile(old,5,5,3);
     moveTile(old,8,5,0);
+    delete[] old;
     old = sideCopy(4);
     moveTile(old,0,4,6);
     moveTile(old,1,4,3);
@@ -238,6 +261,7 @@ void cube::move_l_prime()
     moveTile(old,6,4,8);
     moveTile(old,7,4,5);
     moveTile(old,8,4,2);
+    delete[] old;
 }
 
 void cube::move_d()
@@ -252,15 +276,18 @@ void cube::move_d()
     moveTile(old,6,1,6);
     moveTile(old,7,1,7);
     moveTile(old,8,1,8);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,6,3,6);
     moveTile(old,7,3,7);
     moveTile(old,8,3,8);
+    delete[] old;
     old = old2;
     moveTile(old,6,4,6);
     moveTile(old,7,4,7);
     moveTile(old,8,4,8);
+    delete[] old;
     old = sideCopy(5);
     moveTile(old,0,5,2);
     moveTile(old,1,5,5);
@@ -270,6 +297,7 @@ void cube::move_d()
     moveTile(old,6,5,0);
     moveTile(old,7,5,3);
     moveTile(old,8,5,6);
+    delete[] old;
 }
 
 void cube::move_d_prime()
@@ -284,15 +312,18 @@ void cube::move_d_prime()
     moveTile(old,6,4,6);
     moveTile(old,7,4,7);
     moveTile(old,8,4,8);
+    delete[] old;
     old = old2;
     old2 = sideCopy(3);
     moveTile(old,6,3,6);
     moveTile(old,7,3,7);
     moveTile(old,8,3,8);
+    delete[] old;
     old = old2;
     moveTile(old,6,1,6);
     moveTile(old,7,1,7);
     moveTile(old,8,1,8);
+    delete[] old;
     old = sideCopy(5);
     moveTile(old,0,5,6);
     moveTile(old,1,5,3);
@@ -302,6 +333,7 @@ void cube::move_d_prime()
     moveTile(old,6,5,8);
     moveTile(old,7,5,5);
     moveTile(old,8,5,2);
+    delete[] old;
 }
 
 
@@ -317,15 +349,18 @@ void cube::move_f()
     moveTile(old,6,1,0);
     moveTile(old,7,1,3);
     moveTile(old,8,1,6);
+    delete[] old;
     old = old2;
     old2 = sideCopy(5);
     moveTile(old,0,5,2);
     moveTile(old,3,5,1);
     moveTile(old,6,5,0);
+    delete[] old;
     old = old2;
     moveTile(old,0,4,2);
     moveTile(old,1,4,5);
     moveTile(old,2,4,8);
+    delete[] old;
     old = sideCopy(0);
     moveTile(old,0,0,2);
     moveTile(old,1,0,5);
@@ -335,6 +370,7 @@ void cube::move_f()
     moveTile(old,6,0,0);
     moveTile(old,7,0,3);
     moveTile(old,8,0,6);
+    delete[] old;
 }
 
 
@@ -350,15 +386,18 @@ void cube::move_f_prime()
     moveTile(old,6,4,8);
     moveTile(old,7,4,5);
     moveTile(old,8,4,2);
+    delete[] old;
     old = old2;
     old2 = sideCopy(5);
     moveTile(old,2,5,0);
     moveTile(old,5,5,1);
     moveTile(old,8,5,2);
+    delete[] old;
     old = old2;
     moveTile(old,0,1,6);
     moveTile(old,1,1,3);
     moveTile(old,2,1,0);
+    delete[] old;
     old = sideCopy(0);
     moveTile(old,0,0,6);
     moveTile(old,1,0,3);
@@ -368,6 +407,7 @@ void cube::move_f_prime()
     moveTile(old,6,0,8);
     moveTile(old,7,0,5);
     moveTile(old,8,0,2);
+    delete[] old;
 }
 
 void cube::move_b()
@@ -382,15 +422,18 @@ void cube::move_b()
     moveTile(old,0,4,6);
     moveTile(old,1,4,3);
     moveTile(old,2,4,0);
+    delete[] old;
     old = old2;
     old2 = sideCopy(5);
     moveTile(old,0,5,6);
     moveTile(old,3,5,7);
     moveTile(old,6,5,8);
+    delete[] old;
     old = old2;
     moveTile(old,6,1,8);
     moveTile(old,7,1,5);
     moveTile(old,8,1,2);
+    delete[] old;
     old = sideCopy(3);
     moveTile(old,0,3,2);
     moveTile(old,1,3,5);
@@ -400,6 +443,7 @@ void cube::move_b()
     moveTile(old,6,3,0);
     moveTile(old,7,3,3);
     moveTile(old,8,3,6);
+    delete[] old;
 }
 
 void cube::move_b_prime()
@@ -414,15 +458,18 @@ void cube::move_b_prime()
     moveTile(old,0,1,2);
     moveTile(old,1,1,5);
     moveTile(old,2,1,8);
+    delete[] old;
     old = old2;
     old2 = sideCopy(5);
     moveTile(old,2,5,8);
     moveTile(old,5,5,7);
     moveTile(old,8,5,6);
+    delete[] old;
     old = old2;
     moveTile(old,6,4,0);
     moveTile(old,7,4,3);
     moveTile(old,8,4,6);
+    delete[] old;
     old = sideCopy(3);
     moveTile(old,0,3,6);
     moveTile(old,1,3,3);
@@ -432,6 +479,7 @@ void cube::move_b_prime()
     moveTile(old,6,3,8);
     moveTile(old,7,3,5);
     moveTile(old,8,3,2);
+    delete[] old;
 }
 
 void cube::move_2r()
@@ -444,6 +492,7 @@ void cube::move_2r()
     moveTile(old,2,3,6);
     moveTile(old,5,3,3);
     moveTile(old,8,3,0);
+    delete[] old;
     old = sideCopy(2);
     moveTile(5,2,2,2);
     moveTile(5,5,2,5);
@@ -451,6 +500,7 @@ void cube::move_2r()
     moveTile(old,2,5,2);
     moveTile(old,5,5,5);
     moveTile(old,8,5,8);
+    delete[] old;
     old = sideCopy(1);
     moveTile(old,0,1,8);
     moveTile(old,1,1,7);
@@ -460,6 +510,7 @@ void cube::move_2r()
     moveTile(old,6,1,2);
     moveTile(old,7,1,1);
     moveTile(old,8,1,0);
+    delete[] old;
 }
 
 void cube::move_2u()
@@ -472,6 +523,7 @@ void cube::move_2u()
     moveTile(old,0,3,0);
     moveTile(old,1,3,1);
     moveTile(old,2,3,2);
+    delete[] old;
     old = sideCopy(4);
     moveTile(1,0,4,0);
     moveTile(1,1,4,1);
@@ -479,6 +531,7 @@ void cube::move_2u()
     moveTile(old,0,1,0);
     moveTile(old,1,1,1);
     moveTile(old,2,1,2);
+    delete[] old;
     old = sideCopy(2);
     moveTile(old,0,2,8);
     moveTile(old,1,2,7);
@@ -488,6 +541,7 @@ void cube::move_2u()
     moveTile(old,6,2,2);
     moveTile(old,7,2,1);
     moveTile(old,8,2,0);
+    delete[] old;
 }
 
 void cube::move_2l()
@@ -500,6 +554,7 @@ void cube::move_2l()
     moveTile(old,2,0,6);
     moveTile(old,5,0,3);
     moveTile(old,8,0,0);
+    delete[] old;
     old = sideCopy(5);
     moveTile(2,0,5,0);
     moveTile(2,3,5,3);
@@ -507,6 +562,7 @@ void cube::move_2l()
     moveTile(old,0,2,0);
     moveTile(old,3,2,3);
     moveTile(old,6,2,6);
+    delete[] old;
     old = sideCopy(4);
     moveTile(old,0,4,8);
     moveTile(old,1,4,7);
@@ -516,6 +572,7 @@ void cube::move_2l()
     moveTile(old,6,4,2);
     moveTile(old,7,4,1);
     moveTile(old,8,4,0);
+    delete[] old;
 }
 
 void cube::move_2d()
@@ -528,6 +585,7 @@ void cube::move_2d()
     moveTile(old,6,3,6);
     moveTile(old,7,3,7);
     moveTile(old,8,3,8);
+    delete[] old;
     old = sideCopy(4);
     moveTile(1,6,4,6);
     moveTile(1,7,4,7);
@@ -535,6 +593,7 @@ void cube::move_2d()
     moveTile(old,6,1,6);
     moveTile(old,7,1,7);
     moveTile(old,8,1,8);
+    delete[] old;
     old = sideCopy(5);
     moveTile(old,0,5,8);
     moveTile(old,1,5,7);
@@ -544,6 +603,7 @@ void cube::move_2d()
     moveTile(old,6,5,2);
     moveTile(old,7,5,1);
     moveTile(old,8,5,0);
+    delete[] old;
 }
 
 void cube::move_2f()
@@ -556,6 +616,7 @@ void cube::move_2f()
     moveTile(old,0,4,8);
     moveTile(old,3,4,5);
     moveTile(old,6,4,2);
+    delete[] old;
     old = sideCopy(2);
     moveTile(5,0,2,8);
     moveTile(5,1,2,7);
@@ -563,6 +624,7 @@ void cube::move_2f()
     moveTile(old,6,5,2);
     moveTile(old,7,5,1);
     moveTile(old,8,5,0);
+    delete[] old;
     old = sideCopy(0);
     moveTile(old,0,0,8);
     moveTile(old,1,0,7);
@@ -572,6 +634,7 @@ void cube::move_2f()
     moveTile(old,6,0,2);
     moveTile(old,7,0,1);
     moveTile(old,8,0,0);
+    delete[] old;
 }
 
 void cube::move_2b()
@@ -584,6 +647,7 @@ void cube::move_2b()
     moveTile(old,0,1,8);
     moveTile(old,3,1,5);
     moveTile(old,6,1,2);
+    delete[] old;
     old = sideCopy(5);
     moveTile(2,0,5,8);
     moveTile(2,1,5,7);
@@ -591,6 +655,7 @@ void cube::move_2b()
     moveTile(old,6,2,2);
     moveTile(old,7,2,1);
     moveTile(old,8,2,0);
+    delete[] old;
     old = sideCopy(3);
     moveTile(old,0,3,8);
     moveTile(old,1,3,7);
@@ -600,4 +665,5 @@ void cube::move_2b()
     moveTile(old,6,3,2);
     moveTile(old,7,3,1);
     moveTile(old,8,3,0);
+    delete[] old;
 }
