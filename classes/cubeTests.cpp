@@ -20,9 +20,15 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
     string original = "";
     for (int i = 0; i < length; i++)
     {
+        testCase currentCase = testCases[i];
+        if (currentCase.functionToRun == "displayCube")
+        {
+            displayCube();
+            cout << toString() << endl;
+            continue;
+        }
         if (!wasError)
         {
-            testCase currentCase = testCases[i];
             bool result = execute(currentCase.functionToRun, currentCase.functionArgument);
             if (currentCase.functionToRun == "setTiles" && currentCase.cubeState == "")
                 currentCase.cubeState = currentCase.functionArgument;
@@ -40,7 +46,7 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
                     {
                         currentCase.description = "Executing " + str_toupper(currentCase.functionArgument) + " move ";
                         if (original != "")
-                            currentCase.description += " on " + original;
+                            currentCase.description += "on " + original;
                     }
                 showErrorMessage("Test " + to_string(++counter) + " Failed: " + currentCase.description );
                 wasError = true;
@@ -336,4 +342,89 @@ void cube::testClass()
     runTestCases(counter, 2, toBeTested);
     delete[] toBeTested;
 
+    //48,49
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "315403330 452112150 513523103 150032421 405443044 225054212"
+    );
+    toBeTested[1].set(
+        "move",
+        "b",
+        "315403330 452111152 220523103 401235120 305143544 225054440"
+    );
+    runTestCases(counter, 2, toBeTested);
+    delete[] toBeTested;
+
+    //50,51
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "002305530 121115200 553224543 534430413 331141200 441255422"
+    );
+    toBeTested[1].set(
+        "move",
+        "b'",
+        "002305530 125115203 213224543 403331544 431241200 441255051"
+    );
+    runTestCases(counter, 2, toBeTested);
+    delete[] toBeTested;
+
+    //52-64
+    toBeTested = new testCase[13]();
+    toBeTested[0].set(
+        "setTiles",
+        "531402234 052010330 443121325 125531203 001245434 042551541"
+    );
+    toBeTested[1].set("move", "l");
+    toBeTested[2].set("move", "u");
+    toBeTested[3].set("move", "r");
+    toBeTested[4].set("move", "d");
+    toBeTested[5].set("move", "b");
+    toBeTested[6].set("move", "f");
+    toBeTested[7].set("move", "f'");
+    toBeTested[8].set("move", "b'");
+    toBeTested[9].set("move", "d'");
+    toBeTested[10].set("move", "r'");
+    toBeTested[11].set("move", "u'");
+    toBeTested[12].set("move", "l'",
+        "531402234 052010330 443121325 125531203 001245434 042551541",
+        true,
+        "Executing sequence LURDBFF'B'D'R'U'L' on 531402234 052010330 443121325 125531203 001245434 042551541"
+    );
+    runTestCases(counter, 13, toBeTested);
+    delete[] toBeTested;
+
+    //65,66
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "424201131 044513304 155222202 343434010 213043250 555051135"
+    );
+    toBeTested[1].set(
+        "move",
+        "2r",
+        "420204133 403315440 155221205 143134410 213043250 555052132"
+    );
+    runTestCases(counter, 2, toBeTested);
+    delete[] toBeTested;
+
+    //67-73
+    toBeTested = new testCase[7]();
+    toBeTested[0].set(
+        "setTiles",
+        "023304431 513012233 052023544 444130521 551145050 243152201"
+    );
+    toBeTested[1].set("move", "2u", "444304431 551012233 445320250 023130521 513145050 243152201");
+    toBeTested[2].set("move", "2r", "445301430 332210155 443322251 123430421 513145050 245150200");
+    toBeTested[3].set("move", "2d", "445301421 332210050 443322251 123430430 513145155 002051542");
+    toBeTested[4].set("move", "2l", "045001321 332210050 043022551 124433434 551541315 402351242");
+    toBeTested[5].set("move", "2f", "123100540 532110150 043022204 124433434 550542313 155351242");
+    toBeTested[6].set("move", "2b", 
+        "123100540 533115155 242022204 434334421 050042213 155351340",
+        true,
+        "Executing sequence 2U 2R 2D 2L 2F 2B on 023304431 413012233 052023544 44413051 551145050 243152201"
+    );
+    runTestCases(counter, 7, toBeTested);
+    delete[] toBeTested;
 }
