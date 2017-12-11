@@ -340,4 +340,30 @@ bool cube::execute(string functionToRun, string arguments)
         return setTiles(arguments);
     else if (functionToRun == "move")
         return move(arguments);
+    else if (functionToRun == "runSequence")
+        return runSequence(arguments);
+    return false;
+}
+
+bool cube::runSequence(string sequence)
+{
+    if (sequence.length() == 0)
+        return false;
+    
+    int position = 0;
+    while (true)
+    {
+        int newPosition = sequence.find(' ', position);
+        if (newPosition == -1)
+        {
+            return move(sequence.substr(position));
+        }
+
+        if (!move(sequence.substr(position, newPosition - position)))
+        {
+            return false;
+        }
+        position = newPosition + 1;
+    }
+    return true;
 }

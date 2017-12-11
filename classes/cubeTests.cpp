@@ -32,6 +32,8 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
             bool result = execute(currentCase.functionToRun, currentCase.functionArgument);
             if (currentCase.functionToRun == "setTiles" && currentCase.cubeState == "")
                 currentCase.cubeState = currentCase.functionArgument;
+            if (currentCase.cubeState == "don't check")
+                currentCase.cubeState = "";
             if (result == currentCase.functionResult && (currentCase.cubeState == "" || (currentCase.cubeState != "" && toString() == currentCase.cubeState)))
             {
                 showSuccessMessage("Test " + to_string(++counter) + " Passed");
@@ -47,6 +49,12 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
                         currentCase.description = "Executing " + str_toupper(currentCase.functionArgument) + " move ";
                         if (original != "")
                             currentCase.description += "on " + original;
+                    }
+                    else if (currentCase.functionToRun == "runSequence")
+                    {
+                        currentCase.description = "Executing sequence " + str_toupper(currentCase.functionArgument);
+                        if (original != "")
+                            currentCase.description += " on " + original;
                     }
                 showErrorMessage("Test " + to_string(++counter) + " Failed: " + currentCase.description );
                 wasError = true;
@@ -426,5 +434,48 @@ void cube::testClass()
         "Executing sequence 2U 2R 2D 2L 2F 2B on 023304431 413012233 052023544 44413051 551145050 243152201"
     );
     runTestCases(counter, 7, toBeTested);
+    delete[] toBeTested;
+
+    //74,75
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "023304431 513012233 052023544 444130521 551145050 243152201"
+    );
+    toBeTested[1].set(
+        "runSequence",
+        "2u 2r 2d 2l 2f 2b",
+        "123100540 533115155 242022204 434334421 050042213 155351340"
+    );
+    runTestCases(counter, 2, toBeTested);
+    delete[] toBeTested;
+
+    //76,77
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "310022144 423414201 102331135 452550555 025441313 230502430",
+        "don't check"
+    );
+    toBeTested[1].set(
+        "runSequence",
+        "r 2f r' f' l' 2b u' f' u' f u' f u' 2f u' f u' f' u f u b u' 2b u b 2u b' u b f u r u' r' f' u' b u b' u b 2u b' 2u r u' l' u r' u' l u f u' b' u f' u' b",
+        "000000000 111111111 222222222 333333333 444444444 555555555"
+    );
+    runTestCases(counter, 2, toBeTested);
+    delete[] toBeTested;
+
+    //78,79
+    toBeTested = new testCase[2]();
+    toBeTested[0].set(
+        "setTiles",
+        "221405031 514012225 243023013 204335424 011345555 143150340"
+    );
+    toBeTested[1].set(
+        "runSequence",
+        "r' 2b l' 2d r 2f 2d r u b' l r' u l' u b f d' 2l",
+        "000000000 111111111 222222222 333333333 444444444 555555555"
+    );
+    runTestCases(counter, 2, toBeTested);
     delete[] toBeTested;
 }

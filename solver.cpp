@@ -23,8 +23,6 @@ int main(int argc, char *argv[]){
     cube testCube = cube(3); // test cube
     testCube.testClass();
 
-    testCube.solve();
-
     return 0;
 }
 

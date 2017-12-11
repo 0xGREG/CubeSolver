@@ -58,6 +58,7 @@ class cube
         void initializeCube();
         bool execute(string functionToRun, string argumets);
         void runTestCases(int& counter, int length, testCase* testCases);
+        bool runSequence(string sequence);
         
         void move_r();
         void move_r_prime();
