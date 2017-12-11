@@ -204,7 +204,7 @@ string cube::createColoredString(short character) // gets number as input and pr
             output += "\x1b[1;37m";
             break;
         case 1:
-            output += "\x1b[1;35m";
+            output += "\x1b[1;35m\x1b[38;5;208m"; // set color first to purple and then for supported terminals for orange
             break;
         case 2:
             output += "\x1b[1;32m";

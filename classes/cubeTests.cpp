@@ -478,4 +478,7 @@ void cube::testClass()
     );
     runTestCases(counter, 2, toBeTested);
     delete[] toBeTested;
+    setTiles("221405031 514012225 243023013 204335424 011345555 143150340");
+    displayCube();
+    cout << toString() << endl;
 }
