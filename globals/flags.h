@@ -9,6 +9,8 @@ class globalFlags
     public:
         static bool fDebug;
         static bool fLearning;
+        static bool fTest;
+        static bool fInteractive;
 };
 
 #endif

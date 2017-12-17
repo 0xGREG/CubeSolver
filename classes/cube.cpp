@@ -98,6 +98,7 @@ bool cube::setTiles(string order)
 
     if (verifyTiles(newNet))
     {
+        delete[] tiles;
         tiles = newNet;
     }
 
@@ -197,30 +198,32 @@ bool cube::verifyTiles(short**)
 
 string cube::createColoredString(short character) // gets number as input and prints it as colored ascii (if input was 1 output will be "1")
 {
-    string output = "";//"\x1b[";
+    string output = "";
     switch(character)
     {
+        case -1:
+            return " \x1b[38;5;6m? \x1b[0m";
         case 0:
-            output += "\x1b[1;37m";
+            output += "\x1b[48;5;255m\x1b[30m ";
             break;
         case 1:
-            output += "\x1b[1;35m\x1b[38;5;208m"; // set color first to purple and then for supported terminals for orange
+            output += "\x1b[48;5;208m\x1b[30m ";
             break;
         case 2:
-            output += "\x1b[1;32m";
+            output += "\x1b[48;5;82m\x1b[30m ";
             break;
         case 3:
-            output += "\x1b[1;33m";
+            output += "\x1b[48;5;226m\x1b[30m ";
             break;
         case 4:
-            output += "\x1b[1;31m";
+            output += "\x1b[48;5;196m\x1b[30m ";
             break;
         case 5:
-            output += "\x1b[1;34m";
+            output += "\x1b[48;5;27m\x1b[30m ";
             break;
     }
-    output += char(character+48);
-    output += "\x1b[0m";
+    output += char(character+'0');
+    output += " \x1b[0m";
     return output;
 }
 
@@ -229,10 +232,10 @@ void cube::displayCube()
     cout << endl;
     for (int i = 0; i < 3; i++)
     {
-        cout << "         ";
+        cout << "            ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[2][j])<<" ";
+            cout << createColoredString(tiles[2][j])<<"";
         }
         cout << endl;
     }
@@ -242,32 +245,32 @@ void cube::displayCube()
         cout << " ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[4][j])<<" ";
+            cout << createColoredString(tiles[4][j])<<"";
         }
         cout << "  ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[0][j])<<" ";
+            cout << createColoredString(tiles[0][j])<<"";
         }
         cout << "  ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[1][j])<<" ";
+            cout << createColoredString(tiles[1][j])<<"";
         }
         cout << "  ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[3][j])<<" ";
+            cout << createColoredString(tiles[3][j])<<"";
         }
         cout << endl;
     }
     cout << endl;
     for (int i = 0; i < 3; i++)
     {
-        cout << "         ";
+        cout << "            ";
         for (int j = i*3; j < i*3+3; j++)
         {
-            cout << createColoredString(tiles[5][j])<<" ";
+            cout << createColoredString(tiles[5][j])<<"";
         }
         cout << endl;
     }

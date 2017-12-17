@@ -8,6 +8,8 @@ using namespace std;
 
 class cube;
 
+string str_toupper(string str);
+
 struct testCase
 {
     string functionToRun;
@@ -79,6 +81,8 @@ class cube
         void move_b_prime();
         void move_2b();
 
+        int* getInteractiveCoordinates(short side, short column, short row);
+
         int shortestAlgorithmLength;
         string shortestAlgorithm;
 
@@ -96,6 +100,8 @@ class cube
         bool solveLearning();
 
         bool isSolved() {updateIsSolved(); return solved;}
+
+        void interactiveMode();
 };
 
 #endif

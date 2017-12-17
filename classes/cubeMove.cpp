@@ -6,41 +6,42 @@ using namespace std;
 
 bool cube::move(string side)
 {
-    if (side == "r")
+    side = str_toupper(side);
+    if (side == "R")
         move_r();
-    else if (side == "r'")
+    else if (side == "R'")
         move_r_prime(); 
-    else if (side == "u")
+    else if (side == "U")
         move_u();
-    else if (side == "u'")
+    else if (side == "U'")
         move_u_prime();
-    else if (side == "l")
+    else if (side == "L")
         move_l();
-    else if (side == "l'")
+    else if (side == "L'")
         move_l_prime();
-    else if (side == "d")
+    else if (side == "D")
         move_d();
-    else if (side == "d'")
+    else if (side == "D'")
         move_d_prime();
-    else if (side == "f")
+    else if (side == "F")
         move_f();
-    else if (side == "f'")
+    else if (side == "F'")
         move_f_prime();
-    else if (side == "b")
+    else if (side == "B")
         move_b();
-    else if (side == "b'")
+    else if (side == "B'")
         move_b_prime();
-    else if (side == "2r")
+    else if (side == "2R" || side == "R2")
         move_2r();
-    else if (side == "2u")
+    else if (side == "2U" || side == "U2")
         move_2u();
-    else if (side == "2l")
+    else if (side == "2L" || side == "L2")
         move_2l();
-    else if (side == "2d")
+    else if (side == "2D" || side == "D2")
         move_2d();
-    else if (side == "2f")
+    else if (side == "2F" || side == "F2")
         move_2f();
-    else if (side == "2b")
+    else if (side == "2B" || side == "B2")
         move_2b();
     else
         return false;
