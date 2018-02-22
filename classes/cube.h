@@ -83,6 +83,8 @@ class cube
 
         int* getInteractiveCoordinates(short side, short column, short row);
 
+        bool updateTile(short side, short tile, short color);
+
         int shortestAlgorithmLength;
         string shortestAlgorithm;
 
@@ -90,11 +92,11 @@ class cube
         cube(int _size);
         void testClass(); // for debugging purposes only! will run test cases and mess up with an object
         bool setTiles(string order);
-        bool verifyTiles(short**);
+        bool verifyTiles(short** net);
         bool checkString(string order);
         void displayCube();
         bool move(string side);
-        string toString();
+        string toString(short** net);
 
         bool solve();
         bool solveLearning();

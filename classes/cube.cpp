@@ -109,6 +109,7 @@ bool cube::setTiles(string order)
 
 bool cube::checkString(string order)
 {
+    //TODO: Improve detections
     if (order.length() != 59)
     {
         if (!testing)
@@ -120,26 +121,26 @@ bool cube::checkString(string order)
     {
         if (!order[i*10+9] == ' ')
         {
-            if (!testing)
+            if (!testing && !globalFlags::fInteractive)
                 showErrorMessage("Blocks (sides) are not separated with space");
             return false;
         }
     }
 
     char characters[6];
-    if (globalFlags::fDebug&& !testing)
+    if (globalFlags::fDebug && !testing && !globalFlags::fInteractive)
         cout << "centers: " << endl;
 
     for (int i = 0; i < 6; i++)
     {
         characters[i] = order[i*10+4];
-        if (globalFlags::fDebug && !testing)
+        if (globalFlags::fDebug && !testing && !globalFlags::fInteractive)
             cout << characters[i] << " ";
         for (int j = 0; j < i; j++)
         {
             if (characters[i] == characters[j])
             {
-                if (!testing)
+                if (!testing && !globalFlags::fInteractive)
                 {
                     cout << "\n";
                     showErrorMessage("Centers are not all different!");
@@ -148,7 +149,7 @@ bool cube::checkString(string order)
             }
         }
     }
-    if (globalFlags::fDebug && !testing)
+    if (globalFlags::fDebug && !testing && !globalFlags::fInteractive)
         cout << endl;
 
     char c = '\0';
@@ -168,7 +169,7 @@ bool cube::checkString(string order)
         }
         if (match == -1)
         {
-            if (!testing)
+            if (!testing && !globalFlags::fInteractive)
                 showErrorMessage("The order provided contains more than 9 colors");
             return false;
         }
@@ -182,7 +183,7 @@ bool cube::checkString(string order)
     {
         if (counter[i] != 8)
         {
-            if (!testing)
+            if (!testing && !globalFlags::fInteractive)
                 showErrorMessage("The number of tiles in each color doesn't match");
             return false;
         }
@@ -191,9 +192,9 @@ bool cube::checkString(string order)
     return true;
 }
 
-bool cube::verifyTiles(short**)
+bool cube::verifyTiles(short** net)
 {
-    return true;
+    return checkString(toString(net));
 }
 
 string cube::createColoredString(short character) // gets number as input and prints it as colored ascii (if input was 1 output will be "1")
@@ -296,14 +297,14 @@ void cube::moveTile(int source_side, int source_tile, int destination_side, int 
     tiles[destination_side][destination_tile] = tiles[source_side][source_tile];
 }
 
-string cube::toString()
+string cube::toString(short** net)
 {
     string output = "";
     for (int i = 0; i < 6; i++)
     {
         for (int j = 0; j < 9; j++)
         {
-            output += (char)(tiles[i][j]+48);
+            output += (char)(net[i][j]+48);
         }
         if (i != 5)
             output += " ";
@@ -369,4 +370,11 @@ bool cube::runSequence(string sequence)
         position = newPosition + 1;
     }
     return true;
+}
+
+bool cube::updateTile(short side, short tile, short color)
+{
+    tiles[side][tile] = color;
+
+    return verifyTiles(tiles);
 }

@@ -24,7 +24,7 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
         if (currentCase.functionToRun == "displayCube")
         {
             displayCube();
-            cout << toString() << endl;
+            cout << toString(tiles) << endl;
             continue;
         }
         if (!wasError)
@@ -34,10 +34,10 @@ void cube::runTestCases(int &counter, int length, testCase* testCases)
                 currentCase.cubeState = currentCase.functionArgument;
             if (currentCase.cubeState == "don't check")
                 currentCase.cubeState = "";
-            if (result == currentCase.functionResult && (currentCase.cubeState == "" || (currentCase.cubeState != "" && toString() == currentCase.cubeState)))
+            if (result == currentCase.functionResult && (currentCase.cubeState == "" || (currentCase.cubeState != "" && toString(tiles) == currentCase.cubeState)))
             {
                 showSuccessMessage("Test " + to_string(++counter) + " Passed");
-                original = toString();
+                original = toString(tiles);
             }
             else 
             {

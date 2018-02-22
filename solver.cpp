@@ -30,6 +30,7 @@ int main(int argc, char *argv[]){
     if (globalFlags::fInteractive)
     {
         cube interactiveCube = cube(3);
+        interactiveCube.setTiles("000000000 111111111 222222222 333333333 444444444 555555555");
         interactiveCube.interactiveMode(); 
     }
 
