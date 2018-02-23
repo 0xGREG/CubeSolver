@@ -96,6 +96,17 @@ void cube::interactiveMode()
             valid = updateTile(side, tile, c - '0');
         }
     }
+
+    while (true)
+    {
+        system("clear");
+        displayCube();
+        string c = "";
+        cin >> c;
+        if (c == "q" || c == "Q")
+            break;
+        runSequence(c);
+    }
 }
 
 // return new side and row as an array ([0] - side, [1] - tile)

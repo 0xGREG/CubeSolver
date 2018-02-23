@@ -10,16 +10,20 @@ bool globalFlags::fDebug = false;
 bool globalFlags::fLearning = false;
 bool globalFlags::fTest = false;
 bool globalFlags::fInteractive = false;
+string globalFlags::appPath;
 
-void setFlags(int argc,char **argv);
+void setFlags(int argc, char **argv);
 void showHelp();
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[])
+{
+    globalFlags::appPath = argv[0];
 
     setFlags(argc, argv);
 
     if (globalFlags::fDebug)
-        cout << "CubeSolver " << VERSION << endl << endl;
+        cout << "CubeSolver " << VERSION << endl
+             << endl;
 
     if (globalFlags::fTest)
     {
@@ -31,13 +35,13 @@ int main(int argc, char *argv[]){
     {
         cube interactiveCube = cube(3);
         interactiveCube.setTiles("000000000 111111111 222222222 333333333 444444444 555555555");
-        interactiveCube.interactiveMode(); 
+        interactiveCube.interactiveMode();
     }
 
     return 0;
 }
 
-void setFlags(int argc, char** argv)
+void setFlags(int argc, char **argv)
 {
     for (int i = 1; i < argc; i++) // check for every argument
     {
@@ -60,20 +64,20 @@ void setFlags(int argc, char** argv)
             {
                 switch (argv[i][j])
                 {
-                    case 'v':
-                        globalFlags::fDebug = true;
-                        break;
-                    case 'l':
-                        globalFlags::fLearning = true;
-                        break;
-                    case 'h':
-                        showHelp();
-                        break;
-                    case 'i':
-                        globalFlags::fInteractive = true; 
-                        break;
-                    default: // if found incorrect flag show help
-                        showHelp();
+                case 'v':
+                    globalFlags::fDebug = true;
+                    break;
+                case 'l':
+                    globalFlags::fLearning = true;
+                    break;
+                case 'h':
+                    showHelp();
+                    break;
+                case 'i':
+                    globalFlags::fInteractive = true;
+                    break;
+                default: // if found incorrect flag show help
+                    showHelp();
                 }
             }
         }
@@ -84,13 +88,15 @@ void showHelp()
 {
     cout << "CubeSolver " << VERSION << endl;
     cout << "---" << endl;
-    cout << "Usage: cubeSolver [-hlvig]" << endl << endl;
+    cout << "Usage: cubeSolver [-hlvig]" << endl
+         << endl;
     cout << "-h - help, show this screen" << endl;
     cout << "-l - learning mode, find the shortest algorithm by analizng all the possible moves" << endl;
     cout << "-v - debug/verbose mode. show information about what's happening" << endl;
     cout << "-i - intercative mode" << endl;
     cout << "-g - GUI version" << endl;
-    cout << endl << "Extended arguments:" << endl;
+    cout << endl
+         << "Extended arguments:" << endl;
     cout << "--test - runs test cases" << endl;
     exit(0);
 }

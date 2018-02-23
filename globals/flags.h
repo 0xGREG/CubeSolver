@@ -1,5 +1,8 @@
 #ifndef FLAGS_H
 #define FLAGS_H
+#include <string>
+
+using namespace std;
 
 class globalFlags
 {
@@ -11,6 +14,8 @@ class globalFlags
         static bool fLearning;
         static bool fTest;
         static bool fInteractive;
+
+        static string appPath;
 };
 
 #endif
